@@ -10,17 +10,17 @@ class User extends Model {
 
 User.init(
   {
-    id: {
+    UserId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
-    username: {
+    Username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
+    Email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -28,12 +28,20 @@ User.init(
         isEmail: true,
       },
     },
-    password: {
+    Password: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [6],
       },
+    },
+    CurrentWeight: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    IdealWeight: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
     },
   },
   {

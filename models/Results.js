@@ -1,30 +1,18 @@
 const {Model, DataTypes} = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Food extends Model {}
+class Results extends Model {}
 
-Food.init(
+Results.init(
     {
-        FoodId: {
+        ResultsId: {
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
-            autoIncrement: true,
+            autoIncrement: true
         },
-        Name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        Calories: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        Protein: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        Carbs: {
-            type: DataTypes.INTEGER,
+        CurrentWeight: {
+            type: DataTypes.DECIMAL,
             allowNull: false,
         },
         EntryDate: {
@@ -40,8 +28,8 @@ Food.init(
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'food'
+        modelName: 'Results'
     }
 );
 
-module.exports = Food;
+module.exports = Results;
