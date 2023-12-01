@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Food } = require('../../models');
 
-router.get('/food/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
       const dbFoodData = await Food.findByPk(req.params.id);
       const food = dbFoodData.get({ plain: true });
@@ -11,3 +11,5 @@ router.get('/food/:id', async (req, res) => {
       res.status(500).json(err);
     }
   });
+
+  module.exports = router;
