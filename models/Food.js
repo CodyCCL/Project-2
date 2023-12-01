@@ -19,7 +19,7 @@ Food.init(
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        Protein: {
+        Protien: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
@@ -27,13 +27,21 @@ Food.init(
             type: DataTypes.INTEGER,
             allowNull: false,
         },
+        Fat: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
         EntryDate: {
             type: DataTypes.DATE,
             allowNull: false,
         },
-        User: {
+        UserId: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            references: {
+                model: 'User',
+                key: 'UserId',
+            }
         },
     },
     {
