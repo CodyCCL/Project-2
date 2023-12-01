@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Food } = require('../../models');
 
 // CREATE new user
 router.post('/', async (req, res) => {
@@ -70,6 +70,32 @@ router.post('/logout', (req, res) => {
     });
   } else {
     res.status(404).end();
+  }
+});
+
+router.get('/:id', async (req, res) => {
+  try {
+    const dbUserData = await User.findByPk(req.params.id, {
+      include: [
+        {
+          model: Food,
+          attributes: [
+            'FoodId',
+            'Name',
+            'Calories',
+            'Protien',
+            'Carbs',
+            'Fat',
+            'EntryDate'
+          ],
+        },
+      ],
+    });
+    const user = dbUserData.get({ plain: true });
+    res.json(user);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
   }
 });
 
