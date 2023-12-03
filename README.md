@@ -1,4 +1,4 @@
-# Project-2
+# NutriflexLife-Project-2
 
 ## User Story/Acceptance Criteria
 ```
