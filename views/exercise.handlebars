@@ -1,1 +1,12 @@
-<h1>exercise</h1>
+<h1>Exercise</h1>
+
+{{#each exercises}}
+  <h2>{{exercise.name}}</h2>
+  <p>{{exercise.description}}</p>
+  <ul>
+    {{#each exercise.steps}}
+      <li>{{step}}</li>
+    {{/each}}
+  </ul>
+{{/each}}
+
