@@ -50,7 +50,7 @@ User.init(
       async beforeCreate(newUserData) {
         console.log('before create called')
         console.log(newUserData);
-        newUserData.password = await bcrypt.hash(newUserData.Password, 10);
+        newUserData.Password = await bcrypt.hash(newUserData.Password, 10);
         console.log('new user data after password hash')
         console.log(newUserData);
         return newUserData;
