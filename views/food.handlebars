@@ -1,1 +1,17 @@
-<h1>food</h1>
+<h1>Food</h1>
+
+{{#each foods}}
+  <h2>{{food.name}}</h2>
+  <img src="{{food.image}}" alt="{{food.name}}">
+  <p>{{food.description}}</p>
+  <ul>
+    {{#each food.nutrients}}
+      <li>{{nutrient.name}}: {{nutrient.amount}}{{nutrient.unit}}</li>
+    {{/each}}
+  </ul>
+  <ul>
+    {{#each food.recipes}}
+      <li><a href="{{recipe.link}}">{{recipe.name}}</a></li>
+    {{/each}}
+  </ul>
+{{/each}}
