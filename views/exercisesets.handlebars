@@ -1,1 +1,21 @@
-<h1>exercise sets</h1>
+<h1>Exercise Sets</h1>
+
+{{#each exerciseSets}}
+  <h2>{{exerciseSet.name}}</h2>
+  <img src="{{exerciseSet.image}}" alt="{{exerciseSet.name}}">
+  <p>{{exerciseSet.description}}</p>
+  <ul>
+    {{#each exerciseSet.exercises}}
+      <li>
+        <h3>{{exercise.name}}</h3>
+        <img src="{{exercise.image}}" alt="{{exercise.name}}">
+        <p>{{exercise.description}}</p>
+        <ul>
+          {{#each exercise.steps}}
+            <li>{{step}}</li>
+          {{/each}}
+        </ul>
+      </li>
+    {{/each}}
+  </ul>
+{{/each}}
