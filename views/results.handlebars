@@ -1,1 +1,15 @@
-<h1>results</h1>
+<h1>Exercise Log Summary for {{selectedDate}}</h1>
+
+<ul>
+  <li>Total Exercises: {{totalExercises}}</li>
+  <li>Total Calories Burned: {{totalCalories}}</li>
+  <li>Average Duration per Exercise: {{averageDuration}} minutes</li>
+  {{#if exercisesByMuscleGroup}}
+    <h2>Exercises by Muscle Group:</h2>
+    <ul>
+      {{#each exercisesByMuscleGroup}}
+        <li>{{muscleGroup}}: {{count}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
+</ul>
