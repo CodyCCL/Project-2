@@ -4,7 +4,8 @@ const sequelize = require('../config/connection');
 
 class User extends Model {
   checkPassword(loginPw) {
-    return bcrypt.compareSync(loginPw, this.password);
+    console.log('this password: ' + this.Password);
+    return bcrypt.compareSync(loginPw, this.Password);
   }
 }
 
@@ -37,17 +38,21 @@ User.init(
     },
     CurrentWeight: {
       type: DataTypes.DECIMAL,
-      allowNull: false,
+      allowNull: true,
     },
     IdealWeight: {
       type: DataTypes.DECIMAL,
-      allowNull: false,
+      allowNull: true,
     },
   },
   {
     hooks: {
       async beforeCreate(newUserData) {
-        newUserData.password = await bcrypt.hash(newUserData.password, 10);
+        console.log('before create called')
+        console.log(newUserData);
+        newUserData.password = await bcrypt.hash(newUserData.Password, 10);
+        console.log('new user data after password hash')
+        console.log(newUserData);
         return newUserData;
       },
     },
