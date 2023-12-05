@@ -1,21 +1,26 @@
-<h1>Exercise Sets</h1>
+<h1>Exercise Sets for {{selectedDate}}</h1>
 
-{{#each exerciseSets}}
-  <h2>{{exerciseSet.name}}</h2>
-  <img src="{{exerciseSet.image}}" alt="{{exerciseSet.name}}">
-  <p>{{exerciseSet.description}}</p>
+<form action="/exercises" method="get">
+  <input type="date" name="date" id="datePicker" value="{{date}}" required>
+  <button type="submit">Get Sets</button>
+</form>
+
+{{#if exercises}}
+  {{!-- Displaying the list of sets --}}
   <ul>
-    {{#each exerciseSet.exercises}}
-      <li>
-        <h3>{{exercise.name}}</h3>
-        <img src="{{exercise.image}}" alt="{{exercise.name}}">
-        <p>{{exercise.description}}</p>
-        <ul>
-          {{#each exercise.steps}}
-            <li>{{step}}</li>
-          {{/each}}
-        </ul>
-      </li>
+    {{#each exercises}}
+      {{#each this.sets}}
+        <li>
+          <h3>{{this.Name}} ({{this.Type}})</h3>
+          <p>Set {{this.SetNumber}}: {{this.RepCount}} reps, {{this.Weight}} lbs</p>
+          <p>Calories Burned: {{this.Calories}}</p>
+          <p>Date: {{this.EntryDate}}</p>
+        </li>
+      {{/each}}
     {{/each}}
   </ul>
-{{/each}}
+{{else}}
+  <p>No exercises found for this date.</p>
+{{/if}}
+
+
