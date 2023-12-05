@@ -1,12 +1,32 @@
-<h1>Exercise</h1>
+<h1>Exercise Log for {{selectedDate}}</h1>
 
-{{#each exercises}}
-  <h2>{{exercise.name}}</h2>
-  <p>{{exercise.description}}</p>
-  <ul>
-    {{#each exercise.steps}}
-      <li>{{step}}</li>
-    {{/each}}
-  </ul>
-{{/each}}
+<!-- Date Picker Form -->
+<form action="/exercises" method="get">
+  <input type="date" name="date" id="datePicker" value="{{date}}" required>
+  <button type="submit">Get Exercises</button>
+</form>
 
+{{!-- Check if exercises data is available --}}
+{{#if exercises}}
+{{!-- Displaying the list of exercises --}}
+<ul>
+  {{#each exercises}}
+  <li>
+    <h2>{{this.Name}} ({{this.Type}})</h2>
+    <p>Calories Burned: {{this.Calories}}</p>
+    <p>Date: {{this.EntryDate}}</p>
+    {{#if this.sets}}
+    <ul>
+      {{#each this.sets}}
+      <li>Set {{this.SetNumber}}: {{this.RepCount}} reps, {{this.Weight}} lbs</li>
+      {{/each}}
+    </ul>
+    {{else}}
+    <p>No sets recorded for this exercise.</p>
+    {{/if}}
+  </li>
+  {{/each}}
+</ul>
+{{else}}
+<p>No exercises found for this date.</p>
+{{/if}}

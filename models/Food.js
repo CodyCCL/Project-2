@@ -32,7 +32,7 @@ Food.init(
             allowNull: false
         },
         EntryDate: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false,
         },
         UserId: {

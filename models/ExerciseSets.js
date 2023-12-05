@@ -11,6 +11,10 @@ ExerciseSets.init(
             primaryKey: true,
             autoIncrement: true
         },
+        SetNumber: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
         RepGoal: {
             type: DataTypes.DECIMAL,
             allowNull: false,
@@ -24,10 +28,10 @@ ExerciseSets.init(
             allowNull: false,
         },
         EntryDate: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false,
         },
-        Exercise: {
+        ExerciseId: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },

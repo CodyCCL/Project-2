@@ -13,7 +13,7 @@ Exercise.init(
         },
         Sets: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
         },
         Name:{
             type: DataTypes.STRING,
@@ -24,7 +24,7 @@ Exercise.init(
             allowNull: false,
         },
         EntryDate: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false,
         },
         Calories: {

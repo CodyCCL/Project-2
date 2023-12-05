@@ -1,0 +1,36 @@
+<h1>Post New Exercise</h1>
+
+<form id="exerciseForm" action="/api/exercises" method="post">
+    <div>
+        <label for="name">Exercise Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <div>
+        <label for="calories">Calories Burned:</label>
+        <input type="number" id="calories" name="calories" required>
+    </div>
+
+    <div id="setsContainer">
+        <!-- Sets will be added here -->
+    </div>
+
+    <button type="button" id="addSet">Add Set</button>
+    <button type="submit">Submit Exercise</button>
+</form>
+
+<script>
+    $(document).ready(function () {
+        let setCount = 1;
+
+        $('#addSet').click(function () {
+            const setHtml = `
+                    <div class="set">
+                        <label for="set${setCount}">Set ${setCount}:</label>
+                        <input type="number" id="set${setCount}" name="sets[]" required>
+                    </div>
+                `;
+            $('#setsContainer').append(setHtml);
+            setCount++;
+        });
+    });
+</script>
