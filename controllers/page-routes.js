@@ -13,7 +13,7 @@ router.get('/exercises', async (req, res) => {
         const exerciseData = await Exercise.findAll({
             where: {
                 EntryDate: date,
-                // Additional conditions, like UserId, can be added here
+                // need to add condition to get current user id
             },
             include: [{
                 model: ExerciseSets,
@@ -32,9 +32,7 @@ router.get('/exercises', async (req, res) => {
 router.get('/post-exercise', (req, res) => {
     try {
         // Render the post-exercise.handlebars template
-        res.render('post-exercise', {
-            // Pass any additional data needed by the template, if any
-        });
+        res.render('post-exercise', { });
     } catch (err) {
         console.error('Error rendering exercise form: ', err);
         res.status(500).send(err);
@@ -43,11 +41,9 @@ router.get('/post-exercise', (req, res) => {
 
 router.post('/exercises', async (req, res) => {
   try {
-      // Extract data from the request body
       const { date, name, calories, exerciseType, sets } = req.body;
       const userId = 1; // Hardcoded for the time being
-      console.log(date + name + calories + exerciseType);
-      console.log(sets);
+
       //Create a new exercise entry
       const newExercise = await Exercise.create({
           Name: name,
@@ -55,7 +51,6 @@ router.post('/exercises', async (req, res) => {
           Type: exerciseType,
           User: userId,
           EntryDate: date
-          // Add other necessary Exercise fields
       });
 
       // Associate sets with the newly created exercise
@@ -71,8 +66,8 @@ router.post('/exercises', async (req, res) => {
         }));
           await ExerciseSets.bulkCreate(setsData);
       }
-
-      res.redirect('/exercises'); // Redirect after successful creation
+      // Redirect back to exercise diary after successful creation
+      res.redirect('/exercises'); 
   } catch (err) {
       console.error('Error in creating exercise: ', err);
       res.status(500).send(err);
@@ -81,14 +76,44 @@ router.post('/exercises', async (req, res) => {
 
 router.get('/food', async (req, res) => {
   try {
-    const dbFoodData = await Food.findAll({});
-    const foodData = dbFoodData.map(item => item.get({ plain: true })); // Convert each object to plain data
-    res.render('Food', { foodData });
+    // Use the provided date or default to today
+    const selectedDate = req.query.date || new Date().toISOString().split('T')[0]; 
+    const dbFoodData = await Food.findAll({
+      where: {
+        EntryDate: selectedDate
+        // need to add condition to pull by current user id
+      },
+      order: [['MealType', 'ASC']] // Order by MealType
+    });
+
+    const foodData = dbFoodData.map(item => item.get({ plain: true }));
+
+     let totalCalories = 0, totalProtein = 0, totalCarbs = 0, totalFat = 0;
+
+     // Calculate totals
+     foodData.forEach(item => {
+         totalCalories += item.Calories;
+         totalProtein += item.Protien; 
+         totalCarbs += item.Carbs;
+         totalFat += item.Fat;
+     });
+
+    // Organize food by meal type for a list of each item
+    const organizedFoodData = {
+      Breakfast: foodData.filter(item => item.MealType === 'Breakfast'),
+      Lunch: foodData.filter(item => item.MealType === 'Lunch'),
+      Dinner: foodData.filter(item => item.MealType === 'Dinner'),
+      Snack: foodData.filter(item => item.MealType === 'Snack')
+    };
+    const nutritionTotals = { totalCalories, totalProtein, totalCarbs, totalFat };
+
+    res.render('Food', { date: selectedDate, organizedFoodData, nutritionTotals, foodData });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
+
 // router.get('/food', (req, res) => {
 
 //   res.render('food');

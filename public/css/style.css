@@ -28,3 +28,7 @@ form {
 button {
     cursor: pointer;
 }
+.chart{
+    height: 200px;
+    aspect-ratio: 1;
+}

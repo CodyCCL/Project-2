@@ -1,13 +1,114 @@
-<h1>Food</h1>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0">
+    <h1>Food Diary: {{date}}</h1>
 
-{{#each foodData}} <!-- Use "foodData" which is the variable passed from your route -->
-  <h2>{{Name}}</h2> <!-- Access properties directly without "Food." prefix -->
- 
-  <ul>
-    <li>Name: {{Name}}</li>
-    <li>Protien: {{Protien}}g</li>
-    <li>Carbs: {{Carbs}}g</li>
-    <!-- Include other properties as needed -->
-  </ul>
-{{/each}}
+    <!-- Date Picker Form -->
+    <form action="/food" method="get">
+        <input type="date" name="date" id="datePicker" value="{{date}}" required>
+        <button type="submit">Get Food</button>
+    </form>
 
+    {{!-- Breakfast Section --}}
+    <h3>Breakfast</h3>
+    {{#if organizedFoodData.Breakfast}}
+        <ul>
+            {{#each organizedFoodData.Breakfast}}
+                <li>Name: {{Name}} Protien: {{Protien}}g Carbs: {{Carbs}}g Fat: {{Fat}}g Calories {{Calories}}</li>
+            {{/each}}
+        </ul>
+    {{else}}
+        <p>No breakfast items found for this date.</p>
+    {{/if}}
+
+    {{!-- Lunch Section --}}
+    <h3>Lunch</h3>
+    {{#if organizedFoodData.Lunch}}
+        <ul>
+            {{#each organizedFoodData.Lunch}}
+                <li>Name: {{Name}} Protien: {{Protien}}g Carbs: {{Carbs}}g Fat: {{Fat}}g Calories {{Calories}}</li>
+            {{/each}}
+        </ul>
+    {{else}}
+        <p>No lunch items found for this date.</p>
+    {{/if}}
+
+    {{!-- Dinner Section --}}
+    <h3>Dinner</h3>
+    {{#if organizedFoodData.Dinner}}
+        <ul>
+            {{#each organizedFoodData.Dinner}}
+               <li>Name: {{Name}} Protien: {{Protien}}g Carbs: {{Carbs}}g Fat: {{Fat}}g Calories {{Calories}}</li>
+            {{/each}}
+        </ul>
+    {{else}}
+        <p>No dinner items found for this date.</p>
+    {{/if}}
+
+    {{!-- Snack Section --}}
+    <h3>Snack</h3>
+    {{#if organizedFoodData.Snack}}
+        <ul>
+            {{#each organizedFoodData.Snack}}
+               <li>Name: {{Name}} Protien: {{Protien}}g Carbs: {{Carbs}}g Fat: {{Fat}}g Calories {{Calories}}</li>
+            {{/each}}
+        </ul>
+    {{else}}
+        <p>No snack items found for this date.</p>
+    {{/if}}
+
+<h2>Nutrition Totals for {{date}}</h2>
+<table>
+    <tr>
+        <th>Total Calories</th>
+        <th>Total Protein (g)</th>
+        <th>Total Carbs (g)</th>
+        <th>Total Fat (g)</th>
+    </tr>
+    <tr>
+        <td>{{nutritionTotals.totalCalories}}</td>
+        <td>{{nutritionTotals.totalProtein}}</td>
+        <td>{{nutritionTotals.totalCarbs}}</td>
+        <td>{{nutritionTotals.totalFat}}</td>
+    </tr>
+</table>
+<p></p>
+{{#if foodData}}
+<h2>Nutrient Breakout</h2>
+<div class="chart">
+    <canvas id="nutritionPieChart"></canvas>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('nutritionPieChart').getContext('2d');
+        const nutritionData = {
+            labels: ['Calories', 'Protein', 'Carbs', 'Fat'],
+            datasets: [{
+                label: 'Nutrition Totals',
+                data: [{{nutritionTotals.totalCalories}}, {{nutritionTotals.totalProtein}}, {{nutritionTotals.totalCarbs}}, {{nutritionTotals.totalFat}}],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        new Chart(ctx, {
+            type: 'pie',
+            data: nutritionData,
+            options: {
+                responsive: true
+            }
+        });
+    });
+</script>
+
+{{/if}}

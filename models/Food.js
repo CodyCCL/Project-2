@@ -15,6 +15,10 @@ Food.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        MealType: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         Calories: {
             type: DataTypes.INTEGER,
             allowNull: false,
