@@ -41,36 +41,42 @@ router.get('/post-exercise', (req, res) => {
     }
 });
 
-router.post('/api/exercises', async (req, res) => {
-    try {
-        // Extract data from the request body
-        const { name, calories, sets } = req.body;
-        const userId = req.session.userId; // Assuming you have user session management
+router.post('/exercises', async (req, res) => {
+  try {
+      // Extract data from the request body
+      const { date, name, calories, exerciseType, sets } = req.body;
+      const userId = 1; // Hardcoded for the time being
+      console.log(date + name + calories + exerciseType);
+      console.log(sets);
+      //Create a new exercise entry
+      const newExercise = await Exercise.create({
+          Name: name,
+          Calories: calories,
+          Type: exerciseType,
+          User: userId,
+          EntryDate: date
+          // Add other necessary Exercise fields
+      });
 
-        // Create a new exercise entry
-        const newExercise = await Exercise.create({
-            Name: name,
-            Calories: calories,
-            User: userId
-            // Add other necessary Exercise fields
-        });
+      // Associate sets with the newly created exercise
+      if (sets && sets.length) {
+        const setsData = sets.map(set => ({
+            SetNumber: set.setCount,
+            RepCount: set.repCount,
+            RepGoal: set.repGoal,
+            Weight: set.weight,
+            ExerciseId: newExercise.ExerciseId,
+            User: userId,
+            EntryDate: date
+        }));
+          await ExerciseSets.bulkCreate(setsData);
+      }
 
-        // Associate sets with the newly created exercise
-        if (sets && sets.length) {
-            const setsData = sets.map(set => ({
-                SetNumber: set,
-                ExerciseId: newExercise.ExerciseId,
-                User: userId
-                // Add other necessary ExerciseSets fields
-            }));
-            await ExerciseSets.bulkCreate(setsData);
-        }
-
-        res.redirect('/some-success-page'); // Redirect after successful creation
-    } catch (err) {
-        console.error('Error in creating exercise: ', err);
-        res.status(500).send(err);
-    }
+      res.redirect('/exercises'); // Redirect after successful creation
+  } catch (err) {
+      console.error('Error in creating exercise: ', err);
+      res.status(500).send(err);
+  }
 });
 
 router.get('/food', async (req, res) => {
