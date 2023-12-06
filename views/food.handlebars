@@ -81,10 +81,10 @@
     document.addEventListener('DOMContentLoaded', function() {
         const ctx = document.getElementById('nutritionPieChart').getContext('2d');
         const nutritionData = {
-            labels: ['Calories', 'Protein', 'Carbs', 'Fat'],
+            labels: ['Protein', 'Carbs', 'Fat'],
             datasets: [{
                 label: 'Nutrition Totals',
-                data: [{{nutritionTotals.totalCalories}}, {{nutritionTotals.totalProtein}}, {{nutritionTotals.totalCarbs}}, {{nutritionTotals.totalFat}}],
+                data: [{{nutritionTotals.totalProtein}}, {{nutritionTotals.totalCarbs}}, {{nutritionTotals.totalFat}}],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
