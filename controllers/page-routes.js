@@ -74,6 +74,35 @@ router.post('/exercises', async (req, res) => {
   }
 });
 
+router.get('/food-post', (req, res) => {
+    try {
+        res.render('food-post', {  });
+    } catch (err) {
+        console.error('Error rendering post-food form: ', err);
+        res.status(500).send(err);
+    }
+});
+
+router.post('/post-food', async (req, res) => {
+    try {
+        const { name, calories, protein, carbs, fat, mealType, date } = req.body;
+        await Food.create({
+            Name: name,
+            Calories: calories,
+            Protein: protein,
+            Carbs: carbs,
+            Fat: fat,
+            MealType: mealType,
+            EntryDate: date,
+            UserId: 1//req.session.userId - fixed value for now
+        });
+        res.redirect('/food'); // Redirect to a success or food diary page
+    } catch (err) {
+        console.error('Error posting food:', err);
+        res.status(500).send(err);
+    }
+});
+
 router.get('/Food', async (req, res) => {
   try {
     // Use the provided date or default to today
@@ -93,7 +122,7 @@ router.get('/Food', async (req, res) => {
      // Calculate totals
      foodData.forEach(item => {
          totalCalories += item.Calories;
-         totalProtein += item.Protien; 
+         totalProtein += item.Protein; 
          totalCarbs += item.Carbs;
          totalFat += item.Fat;
      });
