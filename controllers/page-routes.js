@@ -1,11 +1,13 @@
 const router = require('express').Router();
 const { Food, Exercise, ExerciseSets } = require('../models');
+const withAuth = require('../utils/auth');
+
 
 router.get('/', (req, res) => {
   res.render('login');
 });
 
-router.get('/exercises', async (req, res) => {
+router.get('/exercises',withAuth, async (req, res) => {
     const date = req.query.date ? new Date(req.query.date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
  // Use provided date or today's date
 
@@ -22,17 +24,17 @@ router.get('/exercises', async (req, res) => {
         });
 
         const exercises = exerciseData.map(ex => ex.get({ plain: true }));
-        res.render('exercise', { exercises, date }); // Pass the date to the template
+        res.render('exercise', { exercises, date, logged_in: req.session.logged_in  }); // Pass the date to the template
     } catch (err) {
       console.log(err);
         res.status(500).send(err);
     }
 });
 
-router.get('/post-exercise', (req, res) => {
+router.get('/post-exercise', withAuth, (req, res) => {
     try {
         // Render the post-exercise.handlebars template
-        res.render('post-exercise', { });
+        res.render('post-exercise', { logged_in: req.session.logged_in  });
     } catch (err) {
         console.error('Error rendering exercise form: ', err);
         res.status(500).send(err);
@@ -74,9 +76,9 @@ router.post('/exercises', async (req, res) => {
   }
 });
 
-router.get('/food-post', (req, res) => {
+router.get('/food-post', withAuth, (req, res) => {
   try {
-      res.render('food-post', {  });
+      res.render('food-post', {  logged_in: req.session.logged_in });
   } catch (err) {
       console.error('Error rendering post-food form: ', err);
       res.status(500).send(err);
@@ -103,7 +105,7 @@ router.post('/post-food', async (req, res) => {
     }
 });
 
-router.get('/Food', async (req, res) => {
+router.get('/Food', withAuth, async (req, res) => {
   try {
     // Use the provided date or default to today
     const selectedDate = req.query.date || new Date().toISOString().split('T')[0]; 
@@ -136,7 +138,7 @@ router.get('/Food', async (req, res) => {
     };
     const nutritionTotals = { totalCalories, totalProtein, totalCarbs, totalFat };
 
-    res.render('food', { date: selectedDate, organizedFoodData, nutritionTotals, foodData });
+    res.render('food', { date: selectedDate, organizedFoodData, nutritionTotals, foodData, logged_in: req.session.logged_in  });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

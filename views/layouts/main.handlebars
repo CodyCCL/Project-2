@@ -19,12 +19,14 @@
     <li><a href="/exercises">Exercise Diary</a></li>
     {{!-- <li><a href="/exercisesets">Exercise Sets</a></li></li> --}}
     {{!-- <li><a href="/results">Results</a></li> --}}
-    <li><a href="/">Home</a>
+ 
     <!-- If the user is logged in, show a logout button -->
-    {{#if loggedIn}}
-    <button id="logout" class="btn-no-style">Logout</button>
-    <script src="/NutriFlexLife-Project-2/public/js/logout.js"></script>
-    {{/if}}
+       {{#if logged_in}}
+        <a href="/" id="logout">Logout</a>
+        {{else}}
+        <a href="/">Login</a>
+        {{/if}}
+    <script src="/js/logout.js"></script>
     </li>
   </ul>
 </nav>
