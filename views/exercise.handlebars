@@ -1,12 +1,21 @@
+<<<<<<< HEAD
+
+=======
 <div class="exercise-card">
+>>>>>>> 42ebb394cc7b5d5402c3272f112423030b1586af
 <h1>Exercise Diary: {{date}}</h1>
 
 <!-- Date Picker Form -->
 <form action="/exercises" method="get">
   <input type="date" name="date" id="datePicker" value="{{date}}" required>
   <button type="submit">Get Exercises</button>
+  <div class="entry-button">
+    <a href="/post-exercise">+ Add Entry</a>
+  </div>
 </form>
+</div>
 
+<div class="breakout-container">
 {{!-- Check if exercises data is available --}}
 {{#if exercises}}
 {{!-- Displaying the list of exercises --}}
@@ -31,5 +40,8 @@
 {{else}}
 <p>No exercises found for this date.</p>
 {{/if}}
+<<<<<<< HEAD
+=======
 
+>>>>>>> 42ebb394cc7b5d5402c3272f112423030b1586af
 </div>

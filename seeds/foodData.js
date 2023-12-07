@@ -14,7 +14,7 @@ for (let day = 0; day < 5; day++) {
             foodData.push({
                 Name: `${mealType} Item ${item}`,
                 Calories: 100 + 20 * item,
-                Protien: 5 + item,
+                Protein: 5 + item,
                 Carbs: 10 + 2 * item,
                 Fat: 3 + item,
                 EntryDate: entryDate.toISOString().split('T')[0],

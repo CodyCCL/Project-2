@@ -23,7 +23,7 @@ Food.init(
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        Protien: {
+        Protein: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
