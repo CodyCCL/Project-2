@@ -74,7 +74,7 @@ router.post('/exercises', async (req, res) => {
   }
 });
 
-router.get('/food', async (req, res) => {
+router.get('/Food', async (req, res) => {
   try {
     // Use the provided date or default to today
     const selectedDate = req.query.date || new Date().toISOString().split('T')[0]; 
@@ -107,7 +107,7 @@ router.get('/food', async (req, res) => {
     };
     const nutritionTotals = { totalCalories, totalProtein, totalCarbs, totalFat };
 
-    res.render('Food', { date: selectedDate, organizedFoodData, nutritionTotals, foodData });
+    res.render('food', { date: selectedDate, organizedFoodData, nutritionTotals, foodData });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
