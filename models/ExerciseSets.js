@@ -44,7 +44,7 @@ ExerciseSets.init(
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'exercisesets'
+        modelName: 'ExerciseSets'
     }
 );
 

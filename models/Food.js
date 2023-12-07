@@ -52,7 +52,7 @@ Food.init(
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'food'
+        modelName: 'Food'
     }
 );
 
