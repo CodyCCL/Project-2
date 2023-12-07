@@ -1,10 +1,7 @@
    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0"></script>
-<<<<<<< HEAD
-   <div class="header-container">
-=======
+   
 
    <div class="food-card">
->>>>>>> 42ebb394cc7b5d5402c3272f112423030b1586af
     <h1>Food Diary: {{date}}</h1>
 
     <!-- Date Picker Form -->
@@ -15,9 +12,9 @@
         <a href="/food-post">+ Add Entry</a>
         </div>
     </form>
-</div>
+
     {{!-- Breakfast Section --}}
-    <div class="breakout-container">
+
     <h3>Breakfast</h3>
     {{#if organizedFoodData.Breakfast}}
         <ul>
@@ -64,8 +61,8 @@
     {{else}}
         <p>No snack items found for this date.</p>
     {{/if}}
-</div>
-<div class="daily-breakout-container">
+
+
 <h2>Nutrition Totals for {{date}}</h2>
 <table>
     <tr>
@@ -87,7 +84,7 @@
 <div class="chart">
     <canvas id="nutritionPieChart"></canvas>
 </div>
-</div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const ctx = document.getElementById('nutritionPieChart').getContext('2d');

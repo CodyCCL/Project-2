@@ -75,12 +75,12 @@ router.post('/exercises', async (req, res) => {
 });
 
 router.get('/food-post', (req, res) => {
-    try {
-        res.render('food-post', {  });
-    } catch (err) {
-        console.error('Error rendering post-food form: ', err);
-        res.status(500).send(err);
-    }
+  try {
+      res.render('food-post', {  });
+  } catch (err) {
+      console.error('Error rendering post-food form: ', err);
+      res.status(500).send(err);
+  }
 });
 
 router.post('/post-food', async (req, res) => {

@@ -69,7 +69,7 @@ button {
     text-align: center;
   }
   nav ul {
-    padding-top: 40px;
+    padding-top: 20px;
     margin-right: 120px;
     font-size: 18px;
 }
@@ -109,7 +109,7 @@ li {
   .login-card {
     margin: 25px 0 0 0;
     flex: 0 0 50%;
-    max-width: 75%;
+    max-width: 100%;
     padding: 5px;
     border: 3px solid var(--dark);
     border-radius: var(--border-radius);
@@ -121,7 +121,8 @@ li {
 
   .exercise-card {
     margin: 25px 0 0 0;
-    display: inline-table;
+    display: flex;
+    flex-direction: column;
     max-width: 100%;
     padding: 25px;
     border: 3px solid var(--dark);
@@ -144,7 +145,18 @@ li {
     background-color: #4533e8;
     color: var(--light);
   }
-
+  .breakout-card {
+    margin: 25px 0 0 0;
+    flex-direction: column;
+    max-width: 100%;
+    padding: 5px;
+    border: 3px solid var(--dark);
+    border-radius: var(--border-radius);
+    border-style: double;
+    border-width: thick;
+    background-color: #4533e8;
+    color: var(--light);
+  }
 
   .results-card {
     margin: 25px 0 0 0;
@@ -194,12 +206,6 @@ li {
   display: none;
 }
 
-<<<<<<< HEAD
-.breakout-container{
-  display: block;
-  width: 60%;
-}
-
 .header-container{
   display: block;
   width: 100%;
@@ -232,7 +238,7 @@ form{
   color: black;
 }
 
-.form-container{
+.form-contain{
 display: flex;
 align-items: center;
 justify-content: center;
@@ -243,6 +249,7 @@ background-color: #e5e7eb;
 box-shadow: 3px 3px 3px #a1a1aa;
 line-height: 1.1rem;
 }
+
 input{
   display: block;
   font-weight: 900;
@@ -253,20 +260,3 @@ input{
 select{
   display: block;
 }
-=======
-@media screen and (max-width: 768px) {
-  header {
-      flex-direction: row;
-      justify-content: space-between;
-  }
-
-  nav ul {
-      float: none;
-      text-align: center;
-      margin-top: 20px;
-  }
-
-  li {
-      margin: 0 10px;
-  }}
->>>>>>> 42ebb394cc7b5d5402c3272f112423030b1586af
