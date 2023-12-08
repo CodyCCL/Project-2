@@ -18,8 +18,7 @@ Exercise.hasMany(ExerciseSets, {
 });
 
 ExerciseSets.belongsTo(Exercise, {
-    foreignKey: 'exercise_id',
-    as: 'sets' 
+    foreignKey: 'exercise_id', 
 });
 
 
