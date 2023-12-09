@@ -13,12 +13,12 @@ Food.belongsTo(User, {
 });
 
 Exercise.hasMany(ExerciseSets, {
-    foreignKey: 'exercise_id',
+    foreignKey: 'ExerciseId',
     as: 'sets' 
 });
 
 ExerciseSets.belongsTo(Exercise, {
-    foreignKey: 'ExerciseId', 
+    foreignKey: 'exercise_id', 
 });
 
 
