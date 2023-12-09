@@ -11,16 +11,13 @@ User.hasMany(Food, {
 Food.belongsTo(User, {
     foreignKey: 'UserId',
 });
-
 Exercise.hasMany(ExerciseSets, {
-    foreignKey: 'ExerciseId',
-    as: 'sets' 
+    foreignKey: 'Sets',
+    as: 'sets'
+    
 });
-
 ExerciseSets.belongsTo(Exercise, {
-    foreignKey: 'exercise_id',
-    as: 'exercise'
+     foreignKey: 'ExerciseId',
 });
-
 
 module.exports = {User, Food, Exercise, ExerciseSets, Results}

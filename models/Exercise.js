@@ -5,7 +5,7 @@ class Exercise extends Model {}
 
 Exercise.init(
     {
-        ExerciseId: {
+        id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
@@ -14,6 +14,10 @@ Exercise.init(
         Sets: {
             type: DataTypes.INTEGER,
             allowNull: true,
+            references: {
+                model: 'ExerciseSets',
+                key: 'id',
+            }
         },
         Name:{
             type: DataTypes.STRING,
